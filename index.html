@@ -91,7 +91,7 @@ nav.solid{background:rgba(11,10,13,.82);backdrop-filter:blur(14px);border-bottom
 .gal{display:flex;flex-direction:column;gap:.6rem;padding:1.4rem;background:#0e0c12}
 .gal .main{aspect-ratio:1;overflow:hidden;background:#000}
 .gal .main img{width:100%;height:100%;object-fit:cover}
-.gal .th{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.gal .th{display:grid;grid-template-columns:repeat(auto-fit,minmax(54px,1fr));gap:.5rem}
 .gal .th button{aspect-ratio:1;border:1px solid var(--line);overflow:hidden;opacity:.6;padding:0}
 .gal .th button.on{border-color:var(--gold);opacity:1}
 .gal .th img{width:100%;height:100%;object-fit:cover}
@@ -402,11 +402,12 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;background:var(--b
 
 <script>
 const IB="images/ivory-breeze/";
+const CA="images/crystal-air/";
 const P = [
  {n:"Ivory Breeze",f:"Fresh",c:"#3a9d97",p:2999,tag:"Signature",mood:"Calm",imgs:[IB+"1.webp",IB+"3.webp",IB+"4.webp",IB+"5.webp"],sizes:{"10 ml":.25,"50 ml":1},def:"50 ml",d:"Clean, airy and soft. A fragrance that feels like fresh linen and sunlit air.",t:"Citrus, Green notes",h:"White florals",b:"Musk, Soft woods"},
+ {n:"Crystal Air",f:"Fresh",c:"#9aa6bd",p:2999,tag:"New",mood:"Energy",imgs:[1,2,3,4,5].map(k=>CA+k+".webp"),sizes:{"10 ml":.25,"50 ml":1},def:"50 ml",d:"Cool, bright and weightless. A clean, modern scent that feels like crisp morning air.",t:"Citrus, Aquatic notes",h:"Lavender, Light florals",b:"Musk, Cedar"},
  {n:"Noir Oud",f:"Woody",c:"#8a4b2a",p:7499,tag:"Bestseller",mood:"Power",d:"Dark oud wrapped in smoked vanilla. Built for evenings that matter.",t:"Saffron, Black pepper",h:"Agarwood, Rose",b:"Amber, Vanilla, Musk"},
  {n:"Rose Reverie",f:"Floral",c:"#c25a7c",p:5999,tag:"Signature",mood:"Romance",d:"A Taif rose opened with a sip of lychee and softened by white musk.",t:"Lychee, Bergamot",h:"Taif rose, Peony",b:"White musk, Cedar"},
- {n:"Citrus Mirage",f:"Fresh",c:"#e5b93c",p:4499,tag:"New",mood:"Energy",d:"Sun on the skin. Sicilian lemon and mandarin over a clean cedar line.",t:"Lemon, Mandarin",h:"Neroli, Green tea",b:"Cedar, Vetiver"},
  {n:"Velvet Amber",f:"Oriental",c:"#b8661f",p:6499,tag:"",mood:"Comfort",d:"Warm resin and tonka, like cashmere that has been worn all winter.",t:"Cardamom, Orange",h:"Labdanum, Tonka",b:"Amber, Sandalwood"},
  {n:"Midnight Jasmine",f:"Floral",c:"#5b4a9e",p:5499,tag:"",mood:"Mystery",d:"White jasmine that only opens after dark, with a trace of black plum.",t:"Black plum, Pear",h:"Jasmine sambac, Tuberose",b:"Musk, Benzoin"},
  {n:"Santal Silk",f:"Woody",c:"#c9a27a",p:6299,tag:"Signature",mood:"Comfort",d:"Creamy Mysore sandalwood with fig milk and a thread of iris.",t:"Fig, Cardamom",h:"Sandalwood, Iris",b:"Cashmere wood, Musk"},
