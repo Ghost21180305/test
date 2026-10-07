@@ -81,6 +81,21 @@ nav.solid{background:rgba(11,10,13,.82);backdrop-filter:blur(14px);border-bottom
 @keyframes line{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.stage{order:-1;max-width:360px;margin-inline:auto}.hero{padding-top:100px}.stats{gap:1.6rem}.scroll{display:none}}
 
+/* photos */
+.photo{position:relative;z-index:1;aspect-ratio:4/5;margin:1.4rem 0 1rem;overflow:hidden;background:#000}
+.photo img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.card:hover .photo img{transform:scale(1.08)}
+.hero-photo{position:relative;z-index:2;width:62%;aspect-ratio:4/5;border-radius:999px 999px 18px 18px;overflow:hidden;border:1px solid var(--gold2);box-shadow:0 40px 80px rgba(0,0,0,.6);animation:float 8s ease-in-out infinite}
+.hero-photo img{width:100%;height:100%;object-fit:cover}
+.gal{display:flex;flex-direction:column;gap:.6rem;padding:1.4rem;background:#0e0c12}
+.gal .main{aspect-ratio:1;overflow:hidden;background:#000}
+.gal .main img{width:100%;height:100%;object-fit:cover}
+.gal .th{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.gal .th button{aspect-ratio:1;border:1px solid var(--line);overflow:hidden;opacity:.6;padding:0}
+.gal .th button.on{border-color:var(--gold);opacity:1}
+.gal .th img{width:100%;height:100%;object-fit:cover}
+.item .ph{width:54px;height:54px;object-fit:cover}
+
 /* marquee */
 .marquee{border-block:1px solid var(--line);padding:1.3rem 0;overflow:hidden;background:var(--bg2)}
 .marquee div{display:flex;gap:3rem;width:max-content;animation:marq 40s linear infinite;font-family:var(--serif);font-size:1.7rem;font-style:italic;color:var(--gold2);white-space:nowrap}
@@ -148,6 +163,7 @@ section{padding:clamp(80px,12vw,160px) 0}
 .pick{min-height:150px;display:grid;place-items:center}
 .pick .res{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;text-align:left;border:1px solid var(--line);padding:1.8rem 2.2rem;background:var(--card);max-width:620px;animation:fade .6s forwards;opacity:0}
 .pick .res svg{width:80px}
+@media(max-width:520px){.pick .res{grid-template-columns:1fr;padding:1.4rem}}
 .pick .res h3{font-size:2rem}
 .pick .res p{color:var(--mute);margin:.3rem 0 1rem;font-size:.95rem}
 
@@ -198,7 +214,7 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;background:var(--b
 .sizes button{padding:.6rem 1.2rem;border:1px solid var(--line);font-size:.78rem;letter-spacing:.14em}
 .sizes button.on{border-color:var(--gold);color:var(--gold)}
 .close{position:absolute;top:1.1rem;right:1.4rem;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
-@media(max-width:720px){.modal .box{grid-template-columns:1fr}.modal .pic{padding:1.6rem}.modal .pic svg{width:34%}.modal .info{padding:1.8rem 1.4rem}.modal h3{font-size:2.4rem}}
+@media(max-width:720px){.modal .box{grid-template-columns:1fr}.modal .pic{padding:1.6rem}.modal .pic svg{width:34%}.gal{padding:1rem}.modal .info{padding:1.8rem 1.4rem}.modal h3{font-size:2.4rem}}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg2);border-left:1px solid var(--gold2);z-index:95;transform:translateX(100%);transition:.5s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
 .drawer.open{transform:none}
 .drawer header{display:flex;justify-content:space-between;align-items:center;padding:1.6rem 1.8rem;border-bottom:1px solid var(--line)}
@@ -264,7 +280,7 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;background:var(--b
     </div>
     <div class="stage">
       <div class="ring"></div><div class="ring r2"></div>
-      <div id="heroBottle" class="hero-bottle"></div>
+      <div id="heroBottle"></div>
       <div class="mist" id="mist"></div>
     </div>
   </div>
@@ -384,13 +400,14 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;background:var(--b
 <div class="toast" id="toast"></div>
 
 <script>
+const IB="images/ivory-breeze/";
 const P = [
+ {n:"Ivory Breeze",f:"Fresh",c:"#3a9d97",p:2999,tag:"Signature",mood:"Calm",imgs:[IB+"1.webp",IB+"3.webp",IB+"4.webp",IB+"5.webp"],sizes:{"10 ml":.25,"50 ml":1},def:"50 ml",d:"Clean, airy and soft. A fragrance that feels like fresh linen and sunlit air.",t:"Citrus, Green notes",h:"White florals",b:"Musk, Soft woods"},
  {n:"Noir Oud",f:"Woody",c:"#8a4b2a",p:7499,tag:"Bestseller",mood:"Power",d:"Dark oud wrapped in smoked vanilla. Built for evenings that matter.",t:"Saffron, Black pepper",h:"Agarwood, Rose",b:"Amber, Vanilla, Musk"},
  {n:"Rose Reverie",f:"Floral",c:"#c25a7c",p:5999,tag:"Signature",mood:"Romance",d:"A Taif rose opened with a sip of lychee and softened by white musk.",t:"Lychee, Bergamot",h:"Taif rose, Peony",b:"White musk, Cedar"},
  {n:"Citrus Mirage",f:"Fresh",c:"#e5b93c",p:4499,tag:"New",mood:"Energy",d:"Sun on the skin. Sicilian lemon and mandarin over a clean cedar line.",t:"Lemon, Mandarin",h:"Neroli, Green tea",b:"Cedar, Vetiver"},
  {n:"Velvet Amber",f:"Oriental",c:"#b8661f",p:6499,tag:"",mood:"Comfort",d:"Warm resin and tonka, like cashmere that has been worn all winter.",t:"Cardamom, Orange",h:"Labdanum, Tonka",b:"Amber, Sandalwood"},
  {n:"Midnight Jasmine",f:"Floral",c:"#5b4a9e",p:5499,tag:"",mood:"Mystery",d:"White jasmine that only opens after dark, with a trace of black plum.",t:"Black plum, Pear",h:"Jasmine sambac, Tuberose",b:"Musk, Benzoin"},
- {n:"Ocean Drift",f:"Fresh",c:"#2f8fb0",p:4799,tag:"",mood:"Calm",d:"Sea salt, driftwood and cool mineral air. A long exhale in a bottle.",t:"Sea salt, Grapefruit",h:"Marine accord, Sage",b:"Driftwood, Ambergris"},
  {n:"Santal Silk",f:"Woody",c:"#c9a27a",p:6299,tag:"Signature",mood:"Comfort",d:"Creamy Mysore sandalwood with fig milk and a thread of iris.",t:"Fig, Cardamom",h:"Sandalwood, Iris",b:"Cashmere wood, Musk"},
  {n:"Saffron Royale",f:"Oriental",c:"#d4752b",p:7999,tag:"Limited",mood:"Power",d:"Saffron threads soaked in rose and leather. Unmistakably regal.",t:"Saffron, Cinnamon",h:"Leather, Rose",b:"Oud, Patchouli"},
  {n:"Green Whisper",f:"Fresh",c:"#4c9a64",p:4299,tag:"",mood:"Calm",d:"Crushed leaves, fig stems and morning dew after a monsoon night.",t:"Green leaves, Basil",h:"Fig, Lily of the valley",b:"Moss, Cedar"},
@@ -421,7 +438,7 @@ function bottle(c){
 }
 
 // hero
-$("#heroBottle").innerHTML = bottle("#c9a76a");
+$("#heroBottle").outerHTML = `<div class="hero-photo"><img src="${P[0].imgs[0]}" alt="Ivory Breeze Eau de Parfum by Air Elegance" fetchpriority="high"></div>`;
 $("#mist").innerHTML = Array.from({length:9},(_,i)=>`<i style="--x:${(i-4)*26}px;animation-delay:${i*.65}s;left:${46+i*1.2}%"></i>`).join("");
 // marquee
 const words=["Taif Rose","Black Oud","Saffron","Amber","Sandalwood","Jasmine","Vetiver","Bergamot","Musk","Vanilla","Fig","Sea Salt"];
@@ -434,7 +451,7 @@ $("#filters").innerHTML=fams.map(f=>`<button data-f="${f}" class="${f==="All"?"o
 $("#grid").innerHTML=P.map((p,i)=>`
  <article class="card rv" data-i="${i}" data-f="${p.f}" style="--c:${p.c};transition-delay:${(i%4)*80}ms" tabindex="0" role="button" aria-label="${p.n}">
   <span class="no">${String(i+1).padStart(2,"0")}</span>${p.tag?`<span class="tag">${p.tag}</span>`:""}
-  ${bottle(p.c)}
+  ${p.imgs?`<div class="photo"><img src="${p.imgs[0]}" alt="${p.n}" loading="lazy"></div>`:bottle(p.c)}
   <h3>${p.n}</h3><div class="fam">${p.f}</div>
   <div class="row"><span class="price">${inr(p.p)}</span><button class="add" data-add="${i}" aria-label="Add ${p.n}">+</button></div>
  </article>`).join("");
@@ -452,13 +469,13 @@ function render(){
   const tot=bag.reduce((a,b)=>a+b.p*b.q,0);
   $("#total").textContent=inr(tot);
   $("#free").textContent=tot===0?"":tot>=3000?"Free shipping unlocked":`Add ${inr(3000-tot)} more for free shipping`;
-  $("#items").innerHTML=bag.length?bag.map((b,i)=>`<div class="item">${bottle(b.c)}<div><h4>${b.n}</h4><small>${b.size}</small><div class="qty"><button data-q="${i}" data-d="-1">-</button><span>${b.q}</span><button data-q="${i}" data-d="1">+</button></div></div><span class="price">${inr(b.p*b.q)}</span></div>`).join(""):`<div class="empty">Your bag is empty</div>`;
+  $("#items").innerHTML=bag.length?bag.map((b,i)=>`<div class="item">${b.img?`<img class="ph" src="${b.img}" alt="">`:bottle(b.c)}<div><h4>${b.n}</h4><small>${b.size}</small><div class="qty"><button data-q="${i}" data-d="-1">-</button><span>${b.q}</span><button data-q="${i}" data-d="1">+</button></div></div><span class="price">${inr(b.p*b.q)}</span></div>`).join(""):`<div class="empty">Your bag is empty</div>`;
 }
 const SZ={"30 ml":.55,"50 ml":.8,"100 ml":1};
 $("#items").onclick=e=>{const b=e.target.closest("[data-q]");if(!b)return;const it=bag[+b.dataset.q];it.q+=+b.dataset.d;if(it.q<1)bag.splice(+b.dataset.q,1);render()};
 $("#grid").addEventListener("click",e=>{
   const a=e.target.closest("[data-add]");
-  if(a){e.stopPropagation();const p=P[+a.dataset.add];addToBag({n:p.n,c:p.c,size:"100 ml",p:p.p});return}
+  if(a){e.stopPropagation();const p=P[+a.dataset.add];addToBag({n:p.n,c:p.c,img:p.imgs&&p.imgs[0],size:p.def||"100 ml",p:p.p});return}
   const c=e.target.closest(".card");if(c)openModal(+c.dataset.i);
 });
 $("#grid").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.classList.contains("card"))openModal(+e.target.dataset.i)});
@@ -471,19 +488,19 @@ $("#checkout").onclick=()=>toast(bag.length?"Checkout coming soon":"Add a fragra
 
 // modal
 function openModal(i){
-  const p=P[i];let size="100 ml";
-  const price=s=>Math.round(p.p*SZ[s]/10)*10;
+  const p=P[i];let size=p.def||"100 ml";const sz=p.sizes||SZ;
+  const price=s=>p.sizes?Math.round(p.p*sz[s]):Math.round(p.p*sz[s]/10)*10;
   $("#mbox").style.setProperty("--c",p.c);$("#modal").style.setProperty("--c",p.c);
-  $("#mbox").innerHTML=`<div class="pic" style="--c:${p.c}">${bottle(p.c)}</div>
+  $("#mbox").innerHTML=`${p.imgs?`<div class="gal"><div class="main"><img id="gmain" src="${p.imgs[0]}" alt="${p.n}"></div><div class="th">${p.imgs.map((u,k)=>`<button data-g="${u}" class="${k?"":"on"}"><img src="${u}" alt=""></button>`).join("")}</div></div>`:`<div class="pic" style="--c:${p.c}">${bottle(p.c)}</div>`}
   <div class="info"><button class="close" id="mx">Close</button>
    <div class="eyebrow">${p.f} &middot; No. ${String(i+1).padStart(2,"0")}</div><h3>${p.n}</h3><p class="desc">${p.d}</p>
    <div class="pyr"><div><b>Top</b><span>${p.t}</span></div><div><b>Heart</b><span>${p.h}</span></div><div><b>Base</b><span>${p.b}</span></div></div>
-   <div class="sizes">${Object.keys(SZ).map(s=>`<button data-s="${s}" class="${s===size?"on":""}">${s}</button>`).join("")}</div>
+   <div class="sizes">${Object.keys(sz).map(s=>`<button data-s="${s}" class="${s===size?"on":""}">${s}</button>`).join("")}</div>
    <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><span class="price" id="mp" style="font-size:2rem">${inr(price(size))}</span><button class="btn solid" id="madd">Add to bag</button></div></div>`;
   $("#modal").classList.add("open");$("#veil").classList.add("open");
-  $("#mbox").onclick=e=>{const s=e.target.closest("[data-s]");if(!s)return;size=s.dataset.s;
+  $("#mbox").onclick=e=>{const g=e.target.closest("[data-g]");if(g){$("#gmain").src=g.dataset.g;document.querySelectorAll(".th button").forEach(x=>x.classList.toggle("on",x===g));return}const s=e.target.closest("[data-s]");if(!s)return;size=s.dataset.s;
     document.querySelectorAll(".sizes button").forEach(x=>x.classList.toggle("on",x===s));$("#mp").textContent=inr(price(size))};
-  $("#madd").onclick=()=>{addToBag({n:p.n,c:p.c,size,p:price(size)});closeModal();openDrawer(true)};
+  $("#madd").onclick=()=>{addToBag({n:p.n,c:p.c,img:p.imgs&&p.imgs[0],size,p:price(size)});closeModal();openDrawer(true)};
   $("#mx").onclick=closeModal;
 }
 function closeModal(){$("#modal").classList.remove("open");if(!$("#drawer").classList.contains("open"))$("#veil").classList.remove("open")}
@@ -497,7 +514,7 @@ $("#moods").innerHTML=moods.map(m=>`<button data-m="${m}">${m}</button>`).join("
 $("#moods").onclick=e=>{const b=e.target.closest("button");if(!b)return;
   document.querySelectorAll("#moods button").forEach(x=>x.classList.toggle("on",x===b));
   const list=P.map((p,i)=>({p,i})).filter(o=>o.p.mood===b.dataset.m);const o=list[Math.floor(Math.random()*list.length)];
-  $("#pick").innerHTML=`<div class="res">${bottle(o.p.c)}<div><div class="eyebrow">Your match</div><h3>${o.p.n}</h3><p>${o.p.d}</p><button class="btn" id="pv">View notes</button></div></div>`;
+  $("#pick").innerHTML=`<div class="res">${o.p.imgs?`<img src="${o.p.imgs[0]}" alt="" style="width:110px;height:140px;object-fit:cover">`:bottle(o.p.c)}<div><div class="eyebrow">Your match</div><h3>${o.p.n}</h3><p>${o.p.d}</p><button class="btn" id="pv">View notes</button></div></div>`;
   $("#pv").onclick=()=>openModal(o.i)};
 
 // newsletter
