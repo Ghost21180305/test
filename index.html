@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Air Elegance | Luxury Perfumes</title>
+<meta name="description" content="Air Elegance is a house of twelve signature fragrances. Find the scent that walks into the room before you do.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0a0d; --bg2:#121016; --card:#16131b; --line:rgba(231,207,160,.16);
+  --gold:#e7cfa0; --gold2:#b8975a; --ink:#f4efe6; --mute:#a59f93;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+.eyebrow{font-size:.72rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--serif);font-weight:300;line-height:1.05}
+h2{font-size:clamp(2.2rem,5vw,4rem)}
+em{font-style:italic;color:var(--gold)}
+.btn{display:inline-flex;align-items:center;gap:.7rem;padding:1rem 2rem;border:1px solid var(--gold);color:var(--gold);font-size:.75rem;letter-spacing:.28em;text-transform:uppercase;transition:.4s;position:relative;overflow:hidden}
+.btn:hover{background:var(--gold);color:#111}
+.btn.solid{background:var(--gold);color:#111}
+.btn.solid:hover{background:transparent;color:var(--gold)}
+
+/* grain + glow */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.4s}
+nav.solid{background:rgba(11,10,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo{font-family:var(--serif);font-size:1.7rem;letter-spacing:.32em;text-transform:uppercase;font-weight:400}
+.logo span{color:var(--gold)}
+.links{display:flex;gap:2.4rem;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
+.links a{position:relative;padding-block:.4rem}
+.links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:.4s}
+.links a:hover::after{width:100%}
+.cart-btn{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;display:flex;gap:.6rem;align-items:center}
+.cart-btn b{display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--gold);border-radius:50%;font-weight:400;color:var(--gold);font-size:.72rem;letter-spacing:0}
+.burger{display:none}
+@media(max-width:860px){.links{display:none}.burger{display:block;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}}
+.mobile-menu{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:2rem;font-family:var(--serif);font-size:2.4rem}
+.mobile-menu.open{display:flex}
+.mobile-menu .x{position:absolute;top:28px;right:24px;font-family:var(--sans);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase}
+
+/* hero */
+.hero{min-height:100svh;position:relative;display:grid;align-items:center;padding:120px 0 80px;overflow:hidden;
+  background:radial-gradient(60% 60% at 70% 45%,rgba(184,151,90,.22),transparent 70%),radial-gradient(40% 50% at 15% 80%,rgba(120,70,140,.18),transparent 70%),var(--bg)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:2rem;align-items:center}
+.hero h1{font-size:clamp(3.4rem,9vw,8rem);margin:1.2rem 0 1.6rem}
+.hero h1 .l{display:block;overflow:hidden}
+.hero h1 .l i{display:block;font-style:normal;transform:translateY(110%);animation:rise 1.3s cubic-bezier(.2,.8,.2,1) forwards}
+.hero h1 .l:nth-child(2) i{animation-delay:.15s}
+.hero p.lead{max-width:30rem;color:var(--mute);font-size:1.05rem;margin-bottom:2.4rem;opacity:0;animation:fade 1.2s .7s forwards}
+.hero .cta{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fade 1.2s .9s forwards}
+.stats{display:flex;gap:3rem;margin-top:4rem;opacity:0;animation:fade 1.2s 1.1s forwards}
+.stats div b{display:block;font-family:var(--serif);font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1}
+.stats div span{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--mute)}
+@keyframes rise{to{transform:none}}
+@keyframes fade{to{opacity:1}}
+.stage{position:relative;aspect-ratio:1/1.1;display:grid;place-items:center}
+.ring{position:absolute;border:1px solid var(--line);border-radius:50%;inset:6%;animation:spin 40s linear infinite}
+.ring.r2{inset:-4%;animation-duration:70s;animation-direction:reverse;border-style:dashed}
+.ring::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-bottle{width:58%;filter:drop-shadow(0 40px 60px rgba(0,0,0,.6));animation:float 7s ease-in-out infinite;position:relative;z-index:2}
+@keyframes float{50%{transform:translateY(-18px) rotate(1.5deg)}}
+.mist{position:absolute;inset:0;pointer-events:none;z-index:3}
+.mist i{position:absolute;bottom:55%;left:50%;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,rgba(231,207,160,.5),transparent 70%);opacity:0;animation:drift 6s infinite}
+@keyframes drift{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:.9}100%{opacity:0;transform:translate(var(--x),-240px) scale(3.4)}}
+.scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:.65rem;letter-spacing:.34em;text-transform:uppercase;color:var(--mute);display:grid;justify-items:center;gap:.7rem}
+.scroll::after{content:"";width:1px;height:42px;background:linear-gradient(var(--gold),transparent);animation:line 2s infinite}
+@keyframes line{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.stage{order:-1;max-width:360px;margin-inline:auto}.hero{padding-top:100px}.stats{gap:1.6rem}.scroll{display:none}}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);padding:1.3rem 0;overflow:hidden;background:var(--bg2)}
+.marquee div{display:flex;gap:3rem;width:max-content;animation:marq 40s linear infinite;font-family:var(--serif);font-size:1.7rem;font-style:italic;color:var(--gold2);white-space:nowrap}
+.marquee span::after{content:"\2726";margin-left:3rem;font-style:normal;font-size:.9rem}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+section{padding:clamp(80px,12vw,160px) 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:2rem;flex-wrap:wrap;margin-bottom:3.5rem}
+.head p{max-width:26rem;color:var(--mute)}
+
+/* collection */
+.filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.filters button{padding:.7rem 1.4rem;border:1px solid var(--line);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);transition:.3s}
+.filters button:hover{color:var(--ink);border-color:var(--gold2)}
+.filters button.on{background:var(--gold);color:#111;border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:780px){.grid{grid-template-columns:repeat(2,1fr);gap:.8rem}}
+.card{position:relative;background:var(--card);border:1px solid var(--line);padding:1.4rem 1.2rem 1.5rem;transition:.5s;cursor:pointer;overflow:hidden;--c:#c9a76a}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 38%,color-mix(in srgb,var(--c) 38%,transparent),transparent 75%);opacity:.55;transition:.5s}
+.card:hover{transform:translateY(-8px);border-color:var(--gold2)}
+.card:hover::before{opacity:1}
+.card .no{position:absolute;top:1rem;left:1.1rem;font-size:.65rem;letter-spacing:.3em;color:var(--mute);z-index:2}
+.card .tag{position:absolute;top:1rem;right:1.1rem;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);z-index:2}
+.card svg{width:56%;margin:1.6rem auto 1.2rem;position:relative;z-index:1;transition:.6s;filter:drop-shadow(0 18px 22px rgba(0,0,0,.5))}
+.card:hover svg{transform:translateY(-6px) scale(1.06) rotate(-2deg)}
+.card h3{font-size:1.65rem;position:relative;z-index:1}
+.card .fam{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);margin:.2rem 0 1rem;position:relative;z-index:1}
+.card .row{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.price{font-family:var(--serif);font-size:1.35rem;color:var(--gold)}
+.add{width:40px;height:40px;border:1px solid var(--gold2);border-radius:50%;font-size:1.3rem;color:var(--gold);transition:.3s;line-height:1}
+.add:hover{background:var(--gold);color:#111}
+.card.hide{display:none}
+
+/* story */
+.story{background:var(--bg2);border-block:1px solid var(--line)}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,6rem);align-items:center}
+.story .art{aspect-ratio:4/5;border:1px solid var(--line);position:relative;overflow:hidden;
+  background:radial-gradient(60% 45% at 50% 40%,rgba(231,207,160,.28),transparent 70%),linear-gradient(160deg,#1c1724,#0d0b10)}
+.story .art svg{position:absolute;inset:0;width:100%;height:100%}
+.story h2{margin:1rem 0 1.6rem}
+.story p{color:var(--mute);margin-bottom:1.2rem;max-width:34rem}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line)}
+.pillars b{display:block;font-family:var(--serif);font-size:2.2rem;color:var(--gold);font-weight:300}
+.pillars span{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+@media(max-width:860px){.story-grid{grid-template-columns:1fr}}
+
+/* notes */
+.notes{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.notes div{background:var(--bg);padding:2.4rem 1.6rem;transition:.4s}
+.notes div:hover{background:var(--card)}
+.notes .ic{font-size:2rem;margin-bottom:1.2rem;filter:grayscale(.2)}
+.notes h3{font-size:1.6rem;margin-bottom:.6rem}
+.notes p{color:var(--mute);font-size:.92rem}
+@media(max-width:900px){.notes{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.notes{grid-template-columns:1fr}}
+
+/* finder */
+.finder{background:radial-gradient(50% 70% at 50% 100%,rgba(184,151,90,.18),transparent 70%),var(--bg);text-align:center}
+.finder h2{margin:1rem auto 1rem;max-width:14ch}
+.finder>.wrap>p{color:var(--mute);margin:0 auto 2.6rem;max-width:34rem}
+.moods{display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;margin-bottom:2.6rem}
+.moods button{padding:.9rem 1.7rem;border:1px solid var(--line);font-family:var(--serif);font-size:1.3rem;font-style:italic;transition:.3s}
+.moods button:hover,.moods button.on{border-color:var(--gold);color:var(--gold);background:rgba(231,207,160,.06)}
+.pick{min-height:150px;display:grid;place-items:center}
+.pick .res{display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center;text-align:left;border:1px solid var(--line);padding:1.8rem 2.2rem;background:var(--card);max-width:620px;animation:fade .6s forwards;opacity:0}
+.pick .res svg{width:80px}
+.pick .res h3{font-size:2rem}
+.pick .res p{color:var(--mute);margin:.3rem 0 1rem;font-size:.95rem}
+
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.rev{border:1px solid var(--line);padding:2rem;background:var(--card)}
+.rev .st{color:var(--gold);letter-spacing:.3em;margin-bottom:1rem;font-size:.9rem}
+.rev p{font-family:var(--serif);font-size:1.4rem;line-height:1.35;margin-bottom:1.4rem}
+.rev span{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+@media(max-width:900px){.reviews{grid-template-columns:1fr}}
+
+/* gift */
+.gift{background:linear-gradient(120deg,#1a1422,#0d0b10 60%);border-block:1px solid var(--line)}
+.gift-in{display:grid;grid-template-columns:1.2fr .8fr;gap:3rem;align-items:center}
+.gift p{color:var(--mute);margin:1.2rem 0 2rem;max-width:32rem}
+.set{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}
+.set svg{width:100%}
+@media(max-width:860px){.gift-in{grid-template-columns:1fr}}
+
+/* news + footer */
+.news{text-align:center}
+.news form{display:flex;max-width:520px;margin:2rem auto 0;border-bottom:1px solid var(--gold2)}
+.news input{flex:1;background:none;border:0;color:var(--ink);padding:1rem .2rem;font:inherit;outline:0}
+.news input::placeholder{color:var(--mute)}
+.news button{color:var(--gold);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase}
+.news small{display:block;margin-top:1rem;color:var(--gold);min-height:1.4em}
+footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;background:var(--bg2)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.foot p{color:var(--mute);font-size:.88rem;max-width:22rem;margin-top:1rem}
+.foot nav{position:static;display:flex;gap:2.4rem;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;flex-wrap:wrap;height:auto;background:none;border:0;backdrop-filter:none}
+.copy{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+/* modal + drawer */
+.veil{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);z-index:80;opacity:0;pointer-events:none;transition:.4s}
+.veil.open{opacity:1;pointer-events:auto}
+.modal{position:fixed;z-index:90;inset:0;display:grid;place-items:center;padding:20px;pointer-events:none}
+.modal .box{pointer-events:auto;width:min(900px,100%);max-height:92vh;overflow:auto;background:var(--card);border:1px solid var(--gold2);display:grid;grid-template-columns:.9fr 1.1fr;transform:translateY(30px);opacity:0;visibility:hidden;transition:.5s}
+.modal.open .box{transform:none;opacity:1;visibility:visible}
+.modal .pic{display:grid;place-items:center;padding:3rem;background:radial-gradient(70% 60% at 50% 45%,color-mix(in srgb,var(--c,#c9a76a) 45%,transparent),transparent 75%),#0e0c12}
+.modal .pic svg{width:62%}
+.modal .info{padding:2.6rem 2.4rem;position:relative}
+.modal h3{font-size:3rem;margin:.6rem 0}
+.modal .desc{color:var(--mute);margin-bottom:1.6rem}
+.pyr{border-top:1px solid var(--line);margin-bottom:1.6rem}
+.pyr div{display:grid;grid-template-columns:90px 1fr;padding:.8rem 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.pyr b{font-weight:400;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);padding-top:.15rem}
+.sizes{display:flex;gap:.6rem;margin-bottom:1.6rem}
+.sizes button{padding:.6rem 1.2rem;border:1px solid var(--line);font-size:.78rem;letter-spacing:.14em}
+.sizes button.on{border-color:var(--gold);color:var(--gold)}
+.close{position:absolute;top:1.1rem;right:1.4rem;font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+@media(max-width:720px){.modal .box{grid-template-columns:1fr}.modal .pic{padding:1.6rem}.modal .pic svg{width:34%}.modal .info{padding:1.8rem 1.4rem}.modal h3{font-size:2.4rem}}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--bg2);border-left:1px solid var(--gold2);z-index:95;transform:translateX(100%);transition:.5s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer.open{transform:none}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:1.6rem 1.8rem;border-bottom:1px solid var(--line)}
+.drawer header h3{font-size:2rem}
+.items{flex:1;overflow:auto;padding:1rem 1.8rem}
+.item{display:grid;grid-template-columns:54px 1fr auto;gap:1rem;align-items:center;padding:1rem 0;border-bottom:1px solid var(--line)}
+.item svg{width:100%}
+.item h4{font-family:var(--serif);font-weight:400;font-size:1.3rem;line-height:1.1}
+.item small{color:var(--mute);font-size:.75rem;letter-spacing:.1em}
+.qty{display:flex;align-items:center;gap:.7rem;margin-top:.3rem}
+.qty button{width:24px;height:24px;border:1px solid var(--line);line-height:1}
+.empty{text-align:center;color:var(--mute);margin-top:4rem;font-family:var(--serif);font-style:italic;font-size:1.5rem}
+.drawer footer{padding:1.4rem 1.8rem 1.8rem;border-top:1px solid var(--line);background:var(--bg)}
+.tot{display:flex;justify-content:space-between;font-family:var(--serif);font-size:1.6rem;margin-bottom:1rem}
+.drawer .btn{width:100%;justify-content:center}
+.free{font-size:.72rem;letter-spacing:.14em;color:var(--gold);margin-bottom:.8rem}
+.toast{position:fixed;left:50%;bottom:28px;transform:translate(-50%,120px);background:var(--gold);color:#111;padding:.9rem 1.6rem;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;z-index:120;transition:.5s}
+.toast.show{transform:translate(-50%,0)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:1s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.hero h1 .l i{transform:none}.hero p.lead,.hero .cta,.stats{opacity:1}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo">Air <span>Elegance</span></a>
+    <div class="links">
+      <a href="#collection">Collection</a>
+      <a href="#story">The House</a>
+      <a href="#finder">Find Yours</a>
+      <a href="#gift">Gifting</a>
+    </div>
+    <div style="display:flex;gap:1.6rem;align-items:center">
+      <button class="cart-btn" id="openCart" aria-label="Open bag">Bag <b id="count">0</b></button>
+      <button class="burger" id="burger">Menu</button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mmenu">
+  <button class="x" id="mclose">Close</button>
+  <a href="#collection">Collection</a><a href="#story">The House</a><a href="#finder">Find Yours</a><a href="#gift">Gifting</a>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Maison de Parfum &middot; Twelve Signatures</div>
+      <h1><span class="l"><i>Wear the</i></span><span class="l"><i><em>unseen.</em></i></span></h1>
+      <p class="lead">Air Elegance is a house of twelve fragrances, each one built to arrive a moment before you do and stay a while after you leave.</p>
+      <div class="cta">
+        <a href="#collection" class="btn solid">Explore the twelve</a>
+        <a href="#finder" class="btn">Find my scent</a>
+      </div>
+      <div class="stats">
+        <div><b>12</b><span>Signatures</span></div>
+        <div><b>18%</b><span>Pure oil</span></div>
+        <div><b>12h</b><span>Longevity</span></div>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="ring"></div><div class="ring r2"></div>
+      <div id="heroBottle" class="hero-bottle"></div>
+      <div class="mist" id="mist"></div>
+    </div>
+  </div>
+  <div class="scroll">Scroll</div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div id="marq"></div></div>
+
+<section id="collection">
+  <div class="wrap">
+    <div class="head rv">
+      <div><div class="eyebrow">The Collection</div><h2>Twelve ways to<br><em>be remembered</em></h2></div>
+      <p>From bright citrus mornings to deep amber evenings. Tap any bottle to read its notes and choose a size.</p>
+    </div>
+    <div class="filters rv" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="wrap story-grid">
+    <div class="art rv">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7cfa0" stop-opacity=".9"/><stop offset="1" stop-color="#e7cfa0" stop-opacity="0"/></linearGradient></defs>
+        <g fill="none" stroke="url(#g1)" stroke-width=".8">
+          <circle cx="200" cy="250" r="60"/><circle cx="200" cy="250" r="100"/><circle cx="200" cy="250" r="140"/><circle cx="200" cy="250" r="180"/><circle cx="200" cy="250" r="220"/>
+        </g>
+        <g fill="#e7cfa0"><circle cx="200" cy="190" r="3"/><circle cx="278" cy="262" r="2.4"/><circle cx="118" cy="300" r="2"/><circle cx="240" cy="380" r="2.6"/></g>
+        <text x="200" y="262" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="64" font-style="italic" fill="#e7cfa0">AE</text>
+      </svg>
+    </div>
+    <div class="rv">
+      <div class="eyebrow">The House</div>
+      <h2>Scent is the last thing<br>you <em>put on</em></h2>
+      <p>Air Elegance began with a simple idea. A fragrance should feel like air: weightless, everywhere, impossible to hold, and noticed the moment it changes.</p>
+      <p>Every blend is built on 18% concentrated oil, aged for six weeks, and filtered cold so the top notes stay clear and the base stays warm well into the night.</p>
+      <div class="pillars">
+        <div><b>6 wk</b><span>Maceration</span></div>
+        <div><b>100%</b><span>Cruelty free</span></div>
+        <div><b>0</b><span>Compromise</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv"><div><div class="eyebrow">Craft</div><h2>Built note by <em>note</em></h2></div></div>
+    <div class="notes rv">
+      <div><div class="ic">&#9788;</div><h3>Top notes</h3><p>The first breath. Citrus, herbs and sparkling fruit that open the story in seconds.</p></div>
+      <div><div class="ic">&#10047;</div><h3>Heart notes</h3><p>Rose, jasmine, spice and tea. The character that lives on skin for hours.</p></div>
+      <div><div class="ic">&#9830;</div><h3>Base notes</h3><p>Amber, oud, musk and wood. The memory people carry after you leave.</p></div>
+      <div><div class="ic">&#10022;</div><h3>Pure oil</h3><p>18% concentration, so one or two sprays are enough for a full day.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="finder" id="finder">
+  <div class="wrap">
+    <div class="eyebrow rv">Scent Finder</div>
+    <h2 class="rv">What do you want to <em>feel?</em></h2>
+    <p class="rv">Pick a mood and we will name the Air Elegance fragrance that fits it.</p>
+    <div class="moods rv" id="moods"></div>
+    <div class="pick" id="pick"><span style="color:var(--mute);font-style:italic;font-family:var(--serif);font-size:1.4rem">Choose a mood above</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head rv"><div><div class="eyebrow">Kind Words</div><h2>Noticed, <em>every time</em></h2></div></div>
+    <div class="reviews">
+      <div class="rev rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;Three compliments before lunch. Noir Oud lasted until I washed my shirt the next day.&rdquo;</p><span>Aarav M. &middot; Mumbai</span></div>
+      <div class="rev rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;Rose Reverie smells like a quiet garden after rain. I have stopped looking for anything else.&rdquo;</p><span>Priya S. &middot; Ahmedabad</span></div>
+      <div class="rev rv"><div class="st">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>&ldquo;The box, the bottle, the scent. I gave it as a gift and now the whole family orders from here.&rdquo;</p><span>Kabir D. &middot; Delhi</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="gift" id="gift">
+  <div class="wrap gift-in">
+    <div class="rv">
+      <div class="eyebrow">Gifting</div>
+      <h2>The Discovery <em>Set</em></h2>
+      <p>Four 10 ml vials of our best sellers in a hand-finished box. Wear each for a day, then choose the one that stays. The set value is credited toward your first full bottle.</p>
+      <button class="btn solid" id="addSet">Add set &middot; &#8377;1,999</button>
+    </div>
+    <div class="set rv" id="setArt"></div>
+  </div>
+</section>
+
+<section class="news">
+  <div class="wrap">
+    <div class="eyebrow rv">The Inner Circle</div>
+    <h2 class="rv">First access to every <em>new note</em></h2>
+    <form id="nform" class="rv"><input type="email" placeholder="Your email address" required aria-label="Email"><button>Join</button></form>
+    <small id="nmsg"></small>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a href="#top" class="logo">Air <span>Elegance</span></a><p>Twelve signature fragrances. Made slowly, worn confidently.</p></div>
+      <nav><a href="#collection">Collection</a><a href="#story">The House</a><a href="#finder">Scent Finder</a><a href="#gift">Gifting</a></nav>
+    </div>
+    <div class="copy"><span>&copy; 2026 Air Elegance. All rights reserved.</span><span>Free shipping above &#8377;3,000</span></div>
+  </div>
+</footer>
+
+<div class="veil" id="veil"></div>
+<div class="modal" id="modal"><div class="box" id="mbox"></div></div>
+<aside class="drawer" id="drawer" aria-label="Shopping bag">
+  <header><h3>Your Bag</h3><button id="closeCart" class="close" style="position:static">Close</button></header>
+  <div class="items" id="items"></div>
+  <footer><div class="free" id="free"></div><div class="tot"><span>Total</span><span id="total">&#8377;0</span></div><button class="btn solid" id="checkout">Checkout</button></footer>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+const P = [
+ {n:"Noir Oud",f:"Woody",c:"#8a4b2a",p:7499,tag:"Bestseller",mood:"Power",d:"Dark oud wrapped in smoked vanilla. Built for evenings that matter.",t:"Saffron, Black pepper",h:"Agarwood, Rose",b:"Amber, Vanilla, Musk"},
+ {n:"Rose Reverie",f:"Floral",c:"#c25a7c",p:5999,tag:"Signature",mood:"Romance",d:"A Taif rose opened with a sip of lychee and softened by white musk.",t:"Lychee, Bergamot",h:"Taif rose, Peony",b:"White musk, Cedar"},
+ {n:"Citrus Mirage",f:"Fresh",c:"#e5b93c",p:4499,tag:"New",mood:"Energy",d:"Sun on the skin. Sicilian lemon and mandarin over a clean cedar line.",t:"Lemon, Mandarin",h:"Neroli, Green tea",b:"Cedar, Vetiver"},
+ {n:"Velvet Amber",f:"Oriental",c:"#b8661f",p:6499,tag:"",mood:"Comfort",d:"Warm resin and tonka, like cashmere that has been worn all winter.",t:"Cardamom, Orange",h:"Labdanum, Tonka",b:"Amber, Sandalwood"},
+ {n:"Midnight Jasmine",f:"Floral",c:"#5b4a9e",p:5499,tag:"",mood:"Mystery",d:"White jasmine that only opens after dark, with a trace of black plum.",t:"Black plum, Pear",h:"Jasmine sambac, Tuberose",b:"Musk, Benzoin"},
+ {n:"Ocean Drift",f:"Fresh",c:"#2f8fb0",p:4799,tag:"",mood:"Calm",d:"Sea salt, driftwood and cool mineral air. A long exhale in a bottle.",t:"Sea salt, Grapefruit",h:"Marine accord, Sage",b:"Driftwood, Ambergris"},
+ {n:"Santal Silk",f:"Woody",c:"#c9a27a",p:6299,tag:"Signature",mood:"Comfort",d:"Creamy Mysore sandalwood with fig milk and a thread of iris.",t:"Fig, Cardamom",h:"Sandalwood, Iris",b:"Cashmere wood, Musk"},
+ {n:"Saffron Royale",f:"Oriental",c:"#d4752b",p:7999,tag:"Limited",mood:"Power",d:"Saffron threads soaked in rose and leather. Unmistakably regal.",t:"Saffron, Cinnamon",h:"Leather, Rose",b:"Oud, Patchouli"},
+ {n:"Green Whisper",f:"Fresh",c:"#4c9a64",p:4299,tag:"",mood:"Calm",d:"Crushed leaves, fig stems and morning dew after a monsoon night.",t:"Green leaves, Basil",h:"Fig, Lily of the valley",b:"Moss, Cedar"},
+ {n:"Blush Petal",f:"Floral",c:"#e08ca6",p:4999,tag:"New",mood:"Romance",d:"Soft peony and raspberry sugar over a pillow of clean musk.",t:"Raspberry, Pink pepper",h:"Peony, Magnolia",b:"Musk, Blonde wood"},
+ {n:"Smoked Vetiver",f:"Woody",c:"#5f6b4d",p:5799,tag:"",mood:"Mystery",d:"Roots, ash and a campfire memory. Quiet, dry and magnetic.",t:"Grapefruit, Incense",h:"Vetiver, Smoke",b:"Oakmoss, Tonka"},
+ {n:"Golden Hour",f:"Oriental",c:"#e3a23a",p:6799,tag:"Bestseller",mood:"Energy",d:"Honey, apricot and white amber. The glow at the end of a perfect day.",t:"Apricot, Pink pepper",h:"Honey, Osmanthus",b:"White amber, Vanilla"}
+];
+const $ = s=>document.querySelector(s);
+const inr = n=>"₹"+n.toLocaleString("en-IN");
+const shade=(h,a)=>{const n=parseInt(h.slice(1),16);let r=(n>>16)+a,g=(n>>8&255)+a,b=(n&255)+a;const k=v=>Math.max(0,Math.min(255,v));return "#"+((1<<24)+(k(r)<<16)+(k(g)<<8)+k(b)).toString(16).slice(1)};
+let uid=0;
+function bottle(c){
+  const i=++uid;
+  return `<svg viewBox="0 0 120 200" aria-hidden="true">
+  <defs>
+    <linearGradient id="l${i}" x1="0" x2="1"><stop offset="0" stop-color="${shade(c,-50)}"/><stop offset=".45" stop-color="${shade(c,40)}"/><stop offset="1" stop-color="${shade(c,-70)}"/></linearGradient>
+    <linearGradient id="gd${i}" x1="0" x2="1"><stop offset="0" stop-color="#8a6a32"/><stop offset=".5" stop-color="#f3dfae"/><stop offset="1" stop-color="#8a6a32"/></linearGradient>
+  </defs>
+  <rect x="48" y="8" width="24" height="34" rx="3" fill="url(#gd${i})"/>
+  <rect x="52" y="12" width="3" height="26" fill="#fff" opacity=".35"/>
+  <rect x="54" y="42" width="12" height="12" fill="#d9c28a"/>
+  <rect x="14" y="54" width="92" height="136" rx="14" fill="url(#l${i})" stroke="#f3dfae" stroke-opacity=".5"/>
+  <rect x="22" y="62" width="10" height="120" rx="5" fill="#fff" opacity=".22"/>
+  <rect x="34" y="96" width="52" height="58" fill="none" stroke="#f3dfae" stroke-opacity=".7" stroke-width=".8"/>
+  <text x="60" y="122" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="17" font-style="italic" fill="#f3dfae">AE</text>
+  <text x="60" y="140" text-anchor="middle" font-family="Jost,sans-serif" font-size="4.2" letter-spacing="1.6" fill="#f3dfae">AIR ELEGANCE</text>
+  </svg>`;
+}
+
+// hero
+$("#heroBottle").innerHTML = bottle("#c9a76a");
+$("#mist").innerHTML = Array.from({length:9},(_,i)=>`<i style="--x:${(i-4)*26}px;animation-delay:${i*.65}s;left:${46+i*1.2}%"></i>`).join("");
+// marquee
+const words=["Taif Rose","Black Oud","Saffron","Amber","Sandalwood","Jasmine","Vetiver","Bergamot","Musk","Vanilla","Fig","Sea Salt"];
+$("#marq").innerHTML=[...words,...words].map(w=>`<span>${w}</span>`).join("");
+
+// grid + filters
+const fams=["All",...new Set(P.map(p=>p.f))];
+let fam="All";
+$("#filters").innerHTML=fams.map(f=>`<button data-f="${f}" class="${f==="All"?"on":""}">${f}</button>`).join("");
+$("#grid").innerHTML=P.map((p,i)=>`
+ <article class="card rv" data-i="${i}" data-f="${p.f}" style="--c:${p.c};transition-delay:${(i%4)*80}ms" tabindex="0" role="button" aria-label="${p.n}">
+  <span class="no">${String(i+1).padStart(2,"0")}</span>${p.tag?`<span class="tag">${p.tag}</span>`:""}
+  ${bottle(p.c)}
+  <h3>${p.n}</h3><div class="fam">${p.f}</div>
+  <div class="row"><span class="price">${inr(p.p)}</span><button class="add" data-add="${i}" aria-label="Add ${p.n}">+</button></div>
+ </article>`).join("");
+$("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;fam=b.dataset.f;
+  document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",fam!=="All"&&c.dataset.f!==fam));};
+
+// bag
+let bag=[];
+const SET={n:"Discovery Set",p:1999,c:"#c9a76a",size:"4 x 10 ml"};
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("show"),2200)}
+function addToBag(item){const k=item.n+"|"+item.size;const f=bag.find(x=>x.k===k);f?f.q++:bag.push({...item,k,q:1});render();toast(item.n+" added")}
+function render(){
+  $("#count").textContent=bag.reduce((a,b)=>a+b.q,0);
+  const tot=bag.reduce((a,b)=>a+b.p*b.q,0);
+  $("#total").textContent=inr(tot);
+  $("#free").textContent=tot===0?"":tot>=3000?"Free shipping unlocked":`Add ${inr(3000-tot)} more for free shipping`;
+  $("#items").innerHTML=bag.length?bag.map((b,i)=>`<div class="item">${bottle(b.c)}<div><h4>${b.n}</h4><small>${b.size}</small><div class="qty"><button data-q="${i}" data-d="-1">-</button><span>${b.q}</span><button data-q="${i}" data-d="1">+</button></div></div><span class="price">${inr(b.p*b.q)}</span></div>`).join(""):`<div class="empty">Your bag is empty</div>`;
+}
+const SZ={"30 ml":.55,"50 ml":.8,"100 ml":1};
+$("#items").onclick=e=>{const b=e.target.closest("[data-q]");if(!b)return;const it=bag[+b.dataset.q];it.q+=+b.dataset.d;if(it.q<1)bag.splice(+b.dataset.q,1);render()};
+$("#grid").addEventListener("click",e=>{
+  const a=e.target.closest("[data-add]");
+  if(a){e.stopPropagation();const p=P[+a.dataset.add];addToBag({n:p.n,c:p.c,size:"100 ml",p:p.p});return}
+  const c=e.target.closest(".card");if(c)openModal(+c.dataset.i);
+});
+$("#grid").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.classList.contains("card"))openModal(+e.target.dataset.i)});
+$("#addSet").onclick=()=>addToBag(SET);
+$("#setArt").innerHTML=P.filter(p=>["Noir Oud","Rose Reverie","Citrus Mirage","Golden Hour"].includes(p.n)).map(p=>bottle(p.c)).join("");
+
+function openDrawer(o){$("#drawer").classList.toggle("open",o);$("#veil").classList.toggle("open",o)}
+$("#openCart").onclick=()=>openDrawer(true);$("#closeCart").onclick=()=>openDrawer(false);
+$("#checkout").onclick=()=>toast(bag.length?"Checkout coming soon":"Add a fragrance first");
+
+// modal
+function openModal(i){
+  const p=P[i];let size="100 ml";
+  const price=s=>Math.round(p.p*SZ[s]/10)*10;
+  $("#mbox").style.setProperty("--c",p.c);$("#modal").style.setProperty("--c",p.c);
+  $("#mbox").innerHTML=`<div class="pic" style="--c:${p.c}">${bottle(p.c)}</div>
+  <div class="info"><button class="close" id="mx">Close</button>
+   <div class="eyebrow">${p.f} &middot; No. ${String(i+1).padStart(2,"0")}</div><h3>${p.n}</h3><p class="desc">${p.d}</p>
+   <div class="pyr"><div><b>Top</b><span>${p.t}</span></div><div><b>Heart</b><span>${p.h}</span></div><div><b>Base</b><span>${p.b}</span></div></div>
+   <div class="sizes">${Object.keys(SZ).map(s=>`<button data-s="${s}" class="${s===size?"on":""}">${s}</button>`).join("")}</div>
+   <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><span class="price" id="mp" style="font-size:2rem">${inr(price(size))}</span><button class="btn solid" id="madd">Add to bag</button></div></div>`;
+  $("#modal").classList.add("open");$("#veil").classList.add("open");
+  $("#mbox").onclick=e=>{const s=e.target.closest("[data-s]");if(!s)return;size=s.dataset.s;
+    document.querySelectorAll(".sizes button").forEach(x=>x.classList.toggle("on",x===s));$("#mp").textContent=inr(price(size))};
+  $("#madd").onclick=()=>{addToBag({n:p.n,c:p.c,size,p:price(size)});closeModal();openDrawer(true)};
+  $("#mx").onclick=closeModal;
+}
+function closeModal(){$("#modal").classList.remove("open");if(!$("#drawer").classList.contains("open"))$("#veil").classList.remove("open")}
+$("#veil").onclick=()=>{closeModal();openDrawer(false);$("#veil").classList.remove("open")};
+$("#modal").onclick=e=>{if(e.target.id==="modal"){closeModal();$("#veil").classList.remove("open")}};
+addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();openDrawer(false);$("#veil").classList.remove("open")}});
+
+// finder
+const moods=[...new Set(P.map(p=>p.mood))];
+$("#moods").innerHTML=moods.map(m=>`<button data-m="${m}">${m}</button>`).join("");
+$("#moods").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+  document.querySelectorAll("#moods button").forEach(x=>x.classList.toggle("on",x===b));
+  const list=P.map((p,i)=>({p,i})).filter(o=>o.p.mood===b.dataset.m);const o=list[Math.floor(Math.random()*list.length)];
+  $("#pick").innerHTML=`<div class="res">${bottle(o.p.c)}<div><div class="eyebrow">Your match</div><h3>${o.p.n}</h3><p>${o.p.d}</p><button class="btn" id="pv">View notes</button></div></div>`;
+  $("#pv").onclick=()=>openModal(o.i)};
+
+// newsletter
+$("#nform").onsubmit=e=>{e.preventDefault();$("#nmsg").textContent="Welcome to the circle. Check your inbox.";e.target.reset()};
+
+// nav + mobile menu
+addEventListener("scroll",()=>$("#nav").classList.toggle("solid",scrollY>40),{passive:true});
+$("#burger").onclick=()=>$("#mmenu").classList.add("open");
+$("#mclose").onclick=()=>$("#mmenu").classList.remove("open");
+$("#mmenu").onclick=e=>{if(e.target.tagName==="A")$("#mmenu").classList.remove("open")};
+
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+render();
+</script>
+</body>
+</html>
