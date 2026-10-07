@@ -108,7 +108,8 @@ section{padding:clamp(80px,12vw,160px) 0}
 .head p{max-width:26rem;color:var(--mute)}
 
 /* collection */
-.filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.6rem}
+.filters{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+#filters{margin-bottom:2.6rem}
 .filters button{padding:.7rem 1.4rem;border:1px solid var(--line);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);transition:.3s}
 .filters button:hover{color:var(--ink);border-color:var(--gold2)}
 .filters button.on{background:var(--teal);color:#06110f;border-color:var(--teal)}
@@ -296,6 +297,7 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;background:var(--b
       <div><div class="eyebrow">The Collection</div><h2>Twelve ways to<br><em>be remembered</em></h2></div>
       <p>From bright citrus mornings to deep amber evenings. Tap any bottle to read its notes and choose a size.</p>
     </div>
+    <div class="filters rv" id="gfilters"></div>
     <div class="filters rv" id="filters"></div>
     <div class="grid" id="grid"></div>
   </div>
@@ -404,18 +406,18 @@ footer{border-top:1px solid var(--line);padding:3.5rem 0 2rem;background:var(--b
 const IB="images/ivory-breeze/";
 const CA="images/crystal-air/";
 const P = [
- {n:"Ivory Breeze",f:"Fresh",c:"#3a9d97",p:2999,tag:"Signature",mood:"Calm",imgs:[IB+"1.webp",IB+"3.webp",IB+"4.webp",IB+"5.webp"],sizes:{"10 ml":.25,"50 ml":1},def:"50 ml",d:"Clean, airy and soft. A fragrance that feels like fresh linen and sunlit air.",t:"Citrus, Green notes",h:"White florals",b:"Musk, Soft woods"},
- {n:"Crystal Air",f:"Fresh",c:"#9aa6bd",p:2999,tag:"New",mood:"Energy",imgs:[1,2,3,4,5].map(k=>CA+k+".webp"),sizes:{"10 ml":.25,"50 ml":1},def:"50 ml",d:"Cool, bright and weightless. A clean, modern scent that feels like crisp morning air.",t:"Citrus, Aquatic notes",h:"Lavender, Light florals",b:"Musk, Cedar"},
- {n:"Noir Oud",f:"Woody",c:"#8a4b2a",p:7499,tag:"Bestseller",mood:"Power",d:"Dark oud wrapped in smoked vanilla. Built for evenings that matter.",t:"Saffron, Black pepper",h:"Agarwood, Rose",b:"Amber, Vanilla, Musk"},
- {n:"Rose Reverie",f:"Floral",c:"#c25a7c",p:5999,tag:"Signature",mood:"Romance",d:"A Taif rose opened with a sip of lychee and softened by white musk.",t:"Lychee, Bergamot",h:"Taif rose, Peony",b:"White musk, Cedar"},
- {n:"Velvet Amber",f:"Oriental",c:"#b8661f",p:6499,tag:"",mood:"Comfort",d:"Warm resin and tonka, like cashmere that has been worn all winter.",t:"Cardamom, Orange",h:"Labdanum, Tonka",b:"Amber, Sandalwood"},
- {n:"Midnight Jasmine",f:"Floral",c:"#5b4a9e",p:5499,tag:"",mood:"Mystery",d:"White jasmine that only opens after dark, with a trace of black plum.",t:"Black plum, Pear",h:"Jasmine sambac, Tuberose",b:"Musk, Benzoin"},
- {n:"Santal Silk",f:"Woody",c:"#c9a27a",p:6299,tag:"Signature",mood:"Comfort",d:"Creamy Mysore sandalwood with fig milk and a thread of iris.",t:"Fig, Cardamom",h:"Sandalwood, Iris",b:"Cashmere wood, Musk"},
- {n:"Saffron Royale",f:"Oriental",c:"#d4752b",p:7999,tag:"Limited",mood:"Power",d:"Saffron threads soaked in rose and leather. Unmistakably regal.",t:"Saffron, Cinnamon",h:"Leather, Rose",b:"Oud, Patchouli"},
- {n:"Green Whisper",f:"Fresh",c:"#4c9a64",p:4299,tag:"",mood:"Calm",d:"Crushed leaves, fig stems and morning dew after a monsoon night.",t:"Green leaves, Basil",h:"Fig, Lily of the valley",b:"Moss, Cedar"},
- {n:"Blush Petal",f:"Floral",c:"#e08ca6",p:4999,tag:"New",mood:"Romance",d:"Soft peony and raspberry sugar over a pillow of clean musk.",t:"Raspberry, Pink pepper",h:"Peony, Magnolia",b:"Musk, Blonde wood"},
- {n:"Smoked Vetiver",f:"Woody",c:"#5f6b4d",p:5799,tag:"",mood:"Mystery",d:"Roots, ash and a campfire memory. Quiet, dry and magnetic.",t:"Grapefruit, Incense",h:"Vetiver, Smoke",b:"Oakmoss, Tonka"},
- {n:"Golden Hour",f:"Oriental",c:"#e3a23a",p:6799,tag:"Bestseller",mood:"Energy",d:"Honey, apricot and white amber. The glow at the end of a perfect day.",t:"Apricot, Pink pepper",h:"Honey, Osmanthus",b:"White amber, Vanilla"}
+ {n:"Ivory Breeze",g:"Unisex",f:"Fresh",c:"#3a9d97",p:2999,tag:"Signature",mood:"Calm",imgs:[IB+"1.webp",IB+"3.webp",IB+"4.webp",IB+"5.webp"],sizes:{"10 ml":.25,"50 ml":1},def:"50 ml",d:"Clean, airy and soft. A fragrance that feels like fresh linen and sunlit air.",t:"Citrus, Green notes",h:"White florals",b:"Musk, Soft woods"},
+ {n:"Crystal Air",g:"For Him",f:"Fresh",c:"#9aa6bd",p:2999,tag:"New",mood:"Energy",imgs:[1,2,3,4,5].map(k=>CA+k+".webp"),sizes:{"10 ml":.25,"50 ml":1},def:"50 ml",d:"Cool, bright and weightless. A clean, modern scent that feels like crisp morning air.",t:"Citrus, Aquatic notes",h:"Lavender, Light florals",b:"Musk, Cedar"},
+ {n:"Noir Oud",g:"For Him",f:"Woody",c:"#8a4b2a",p:7499,tag:"Bestseller",mood:"Power",d:"Dark oud wrapped in smoked vanilla. Built for evenings that matter.",t:"Saffron, Black pepper",h:"Agarwood, Rose",b:"Amber, Vanilla, Musk"},
+ {n:"Rose Reverie",g:"For Her",f:"Floral",c:"#c25a7c",p:5999,tag:"Signature",mood:"Romance",d:"A Taif rose opened with a sip of lychee and softened by white musk.",t:"Lychee, Bergamot",h:"Taif rose, Peony",b:"White musk, Cedar"},
+ {n:"Velvet Amber",g:"Unisex",f:"Oriental",c:"#b8661f",p:6499,tag:"",mood:"Comfort",d:"Warm resin and tonka, like cashmere that has been worn all winter.",t:"Cardamom, Orange",h:"Labdanum, Tonka",b:"Amber, Sandalwood"},
+ {n:"Midnight Jasmine",g:"For Her",f:"Floral",c:"#5b4a9e",p:5499,tag:"",mood:"Mystery",d:"White jasmine that only opens after dark, with a trace of black plum.",t:"Black plum, Pear",h:"Jasmine sambac, Tuberose",b:"Musk, Benzoin"},
+ {n:"Santal Silk",g:"Unisex",f:"Woody",c:"#c9a27a",p:6299,tag:"Signature",mood:"Comfort",d:"Creamy Mysore sandalwood with fig milk and a thread of iris.",t:"Fig, Cardamom",h:"Sandalwood, Iris",b:"Cashmere wood, Musk"},
+ {n:"Saffron Royale",g:"For Him",f:"Oriental",c:"#d4752b",p:7999,tag:"Limited",mood:"Power",d:"Saffron threads soaked in rose and leather. Unmistakably regal.",t:"Saffron, Cinnamon",h:"Leather, Rose",b:"Oud, Patchouli"},
+ {n:"Green Whisper",g:"Unisex",f:"Fresh",c:"#4c9a64",p:4299,tag:"",mood:"Calm",d:"Crushed leaves, fig stems and morning dew after a monsoon night.",t:"Green leaves, Basil",h:"Fig, Lily of the valley",b:"Moss, Cedar"},
+ {n:"Blush Petal",g:"For Her",f:"Floral",c:"#e08ca6",p:4999,tag:"New",mood:"Romance",d:"Soft peony and raspberry sugar over a pillow of clean musk.",t:"Raspberry, Pink pepper",h:"Peony, Magnolia",b:"Musk, Blonde wood"},
+ {n:"Smoked Vetiver",g:"For Him",f:"Woody",c:"#5f6b4d",p:5799,tag:"",mood:"Mystery",d:"Roots, ash and a campfire memory. Quiet, dry and magnetic.",t:"Grapefruit, Incense",h:"Vetiver, Smoke",b:"Oakmoss, Tonka"},
+ {n:"Golden Hour",g:"Unisex",f:"Oriental",c:"#e3a23a",p:6799,tag:"Bestseller",mood:"Energy",d:"Honey, apricot and white amber. The glow at the end of a perfect day.",t:"Apricot, Pink pepper",h:"Honey, Osmanthus",b:"White amber, Vanilla"}
 ];
 const $ = s=>document.querySelector(s);
 const inr = n=>"₹"+n.toLocaleString("en-IN");
@@ -448,18 +450,22 @@ $("#marq").innerHTML=[...words,...words].map(w=>`<span>${w}</span>`).join("");
 
 // grid + filters
 const fams=["All",...new Set(P.map(p=>p.f))];
-let fam="All";
+const gens=["Everyone","For Him","For Her","Unisex"];
+let fam="All",gen="Everyone";
+$("#gfilters").innerHTML=gens.map(f=>`<button data-g="${f}" class="${f===gen?"on":""}">${f}</button>`).join("");
 $("#filters").innerHTML=fams.map(f=>`<button data-f="${f}" class="${f==="All"?"on":""}">${f}</button>`).join("");
 $("#grid").innerHTML=P.map((p,i)=>`
- <article class="card rv" data-i="${i}" data-f="${p.f}" style="--c:${p.c};transition-delay:${(i%4)*80}ms" tabindex="0" role="button" aria-label="${p.n}">
+ <article class="card rv" data-i="${i}" data-f="${p.f}" data-g="${p.g}" style="--c:${p.c};transition-delay:${(i%4)*80}ms" tabindex="0" role="button" aria-label="${p.n}">
   <span class="no">${String(i+1).padStart(2,"0")}</span>${p.tag?`<span class="tag">${p.tag}</span>`:""}
   ${p.imgs?`<div class="photo"><img src="${p.imgs[0]}" alt="${p.n}" loading="lazy"></div>`:bottle(p.c)}
-  <h3>${p.n}</h3><div class="fam">${p.f}</div>
+  <h3>${p.n}</h3><div class="fam">${p.f} &middot; ${p.g}</div>
   <div class="row"><span class="price">${inr(p.p)}</span><button class="add" data-add="${i}" aria-label="Add ${p.n}">+</button></div>
  </article>`).join("");
+function applyFilters(){document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",(fam!=="All"&&c.dataset.f!==fam)||(gen!=="Everyone"&&c.dataset.g!==gen)))}
 $("#filters").onclick=e=>{const b=e.target.closest("button");if(!b)return;fam=b.dataset.f;
-  document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("on",x===b));
-  document.querySelectorAll(".card").forEach(c=>c.classList.toggle("hide",fam!=="All"&&c.dataset.f!==fam));};
+  document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("on",x===b));applyFilters()};
+$("#gfilters").onclick=e=>{const b=e.target.closest("button");if(!b)return;gen=b.dataset.g;
+  document.querySelectorAll("#gfilters button").forEach(x=>x.classList.toggle("on",x===b));applyFilters()};
 
 // bag
 let bag=[];
@@ -495,7 +501,7 @@ function openModal(i){
   $("#mbox").style.setProperty("--c",p.c);$("#modal").style.setProperty("--c",p.c);
   $("#mbox").innerHTML=`${p.imgs?`<div class="gal"><div class="main"><img id="gmain" src="${p.imgs[0]}" alt="${p.n}"></div><div class="th">${p.imgs.map((u,k)=>`<button data-g="${u}" class="${k?"":"on"}"><img src="${u}" alt=""></button>`).join("")}</div></div>`:`<div class="pic" style="--c:${p.c}">${bottle(p.c)}</div>`}
   <div class="info"><button class="close" id="mx">Close</button>
-   <div class="eyebrow">${p.f} &middot; No. ${String(i+1).padStart(2,"0")}</div><h3>${p.n}</h3><p class="desc">${p.d}</p>
+   <div class="eyebrow">${p.f} &middot; ${p.g} &middot; No. ${String(i+1).padStart(2,"0")}</div><h3>${p.n}</h3><p class="desc">${p.d}</p>
    <div class="pyr"><div><b>Top</b><span>${p.t}</span></div><div><b>Heart</b><span>${p.h}</span></div><div><b>Base</b><span>${p.b}</span></div></div>
    <div class="sizes">${Object.keys(sz).map(s=>`<button data-s="${s}" class="${s===size?"on":""}">${s}</button>`).join("")}</div>
    <div style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap"><span class="price" id="mp" style="font-size:2rem">${inr(price(size))}</span><button class="btn solid" id="madd">Add to bag</button></div></div>`;
