@@ -22,10 +22,11 @@ def build(R,fn=None,res=0.08):
     deep=0.5*sm(np.clip((w-d)/0.9,0,1))
     acc=0.2; xx=np.abs(d-(w+1.5)); az=np.where(xx<0.77,(np.sqrt(RB**2-xx**2)-(RB-acc)),0)*(d>w+0.8)
     bd=np.abs(r-(R-1.3)); bz=np.where(bd<0.77,(np.sqrt(RB**2-bd**2)-(RB-acc)),0)
-    inside=r<R-2.0
-    Z=-np.maximum(np.maximum(deep*inside,az*inside),bz)
-    A=((deep*inside)>0.03).sum()*res*res; band=np.abs(d-(w+1.5))<0.2; Lacc=(band&inside&(d>w+0.8)).sum()*res*res/0.4
-    L=A/0.6*1.5+Lacc+2*np.pi*(R-1.3)
+    inside=r<=R-0.3
+    Z=-np.maximum(deep*inside,az*inside)
+    Acut=((deep*inside)>0.01).sum()*res*res; Adeep=((deep*inside)>0.2).sum()*res*res
+    band=np.abs(d-(w+1.5))<0.2; Lacc=(band&inside&(d>w+0.8)).sum()*res*res/0.4
+    L=Acut/0.15+Adeep/0.8+Lacc   # finish stepover 0.15 (scallop ~0.002 mm) + rough pass + accent lines
     return X,Y,r,Z,L
 for R in (25,19):
     L=render(f"riverislands_D{2*R}",R,None,"Design 6 River Islands"); print(2*R,"approx path mm",round(L),"min @F200",round(L/200,1))
