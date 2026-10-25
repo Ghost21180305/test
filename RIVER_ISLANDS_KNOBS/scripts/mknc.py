@@ -3,7 +3,7 @@ from field import *
 from scipy.ndimage import grey_dilation
 from scipy.interpolate import RegularGridInterpolator
 RB=1.5; SAFE=5.0; RET=1.0; APP=0.2
-F_FIN=200; F_ROUGH=200; F_PLUNGE=100
+F_FIN=300; F_ROUGH=300; F_PLUNGE=120
 def tip_surface(R,a,Z):
     res=a[1]-a[0]; X,Y=np.meshgrid(a,a); r=np.hypot(X,Y); h=np.where(r<=R,Z,-10.0)
     k=int(np.ceil(RB/res)); o=np.arange(-k,k+1)*res; DX,DY=np.meshgrid(o,o); d=np.hypot(DX,DY); foot=d<=RB
@@ -62,11 +62,11 @@ def emit(fh,passes,title):
 def make_nc(R,tag,path):
     a,Z=field(R); f=tip_surface(R,a,Z)
     passes=[]
-    rows=runs(f,R,'x',0.15,lambda t:t,lambda t:t<-0.01)
-    passes.append(("FINISH SINGLE PASS  STEPOVER 0.15  MAX DEPTH 0.4","x",rows,F_FIN))
+    rows=runs(f,R,'x',0.25,lambda t:t,lambda t:t<-0.01)
+    passes.append(("FINISH SINGLE PASS  STEPOVER 0.25  MAX DEPTH 0.4","x",rows,F_FIN))
     with open(path,"w") as fh:
         fh.write(f"%\n( RIVER ISLANDS KNOB TOP  D{2*R:.1f} )\n( TOOL T1: R1.5 BALL NOSE  D3 SHANK  8 FLUTE LEN  50 OAL  4 FLUTE )\n")
-        fh.write("( WORK ZERO: XY = KNOB CENTER, Z = TOP FACE OF BLANK )\n( MAX DEPTH 0.4  SPINDLE S24000 FULL RPM  FEED F200 )\n")
+        fh.write("( WORK ZERO: XY = KNOB CENTER, Z = TOP FACE OF BLANK )\n( MAX DEPTH 0.4  SPINDLE S24000 FULL RPM  FEED F300 )\n")
         fh.write("G21 G90 G94 G17 G40 G49 G80\nG54\nT1 M6\nS24000 M3\n"+f"G0 Z{SAFE:.3f}\n")
         # emit each pass, count
         tot=0;nl=0;ln=0;perpass=[]
