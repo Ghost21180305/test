@@ -40,7 +40,7 @@ def write_stl(path,V,T):
     a,b,c=V[T[:,0]],V[T[:,1]],V[T[:,2]]; n=np.cross(b-a,c-a); n/=np.maximum(np.linalg.norm(n,axis=1,keepdims=True),1e-12)
     rec=np.zeros(len(T),dtype=[('n','<f4',3),('v','<f4',(3,3)),('a','<u2')]); rec['n']=n; rec['v']=np.stack([a,b,c],1)
     with open(path,'wb') as fh: fh.write(b'Citadel River Islands knob'.ljust(80,b' ')); fh.write(np.uint32(len(T)).tobytes()); fh.write(rec.tobytes())
-for D,rn in ((38.1,4.5),(40.1,4.5)):
+for D,rn in ((38.0,4.5),(40.0,4.5)):
     R=D/2; V,T=model(R,rn); v=vol(V,T)
     if v<0: T=T[:,[0,2,1]]; v=-v
     E=np.sort(np.concatenate([T[:,[0,1]],T[:,[1,2]],T[:,[2,0]]]),axis=1); u,cnt=np.unique(E,axis=0,return_counts=True)

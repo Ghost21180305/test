@@ -19,7 +19,7 @@ def build(R,fn=None,res=0.08):
     gy,gx=np.gradient(f,res); gr=np.maximum(np.hypot(gx,gy),1e-3)
     d=np.abs(f-0.05)/gr; w=(1.1+0.6*np.clip(g,-1.5,1.5))*(R/25)+0.4
     sm=lambda x:x*x*(3-2*x)
-    deep=0.5*sm(np.clip((w-d)/0.9,0,1))
+    deep=0.4*sm(np.clip((w-d)/0.9,0,1))
     acc=0.2; xx=np.abs(d-(w+1.5)); az=np.where(xx<0.77,(np.sqrt(RB**2-xx**2)-(RB-acc)),0)*(d>w+0.8)
     bd=np.abs(r-(R-1.3)); bz=np.where(bd<0.77,(np.sqrt(RB**2-bd**2)-(RB-acc)),0)
     inside=r<=R-0.3

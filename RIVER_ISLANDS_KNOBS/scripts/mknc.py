@@ -62,16 +62,11 @@ def emit(fh,passes,title):
 def make_nc(R,tag,path):
     a,Z=field(R); f=tip_surface(R,a,Z)
     passes=[]
-    prev=0.0
-    for lay in (-0.2,-0.4):
-        pv=prev
-        rows=runs(f,R,'y',0.6,lambda t,l=lay:np.maximum(t+0.06,l),lambda t,pv=pv:(t+0.06)<pv-0.01)
-        passes.append((f"ROUGH LAYER Z{lay}  STOCK 0.06  STEPOVER 0.6","y",rows,F_ROUGH)); prev=lay
     rows=runs(f,R,'x',0.15,lambda t:t,lambda t:t<-0.01)
-    passes.append(("FINISH  STEPOVER 0.15  (SCALLOP 0.002)","x",rows,F_FIN))
+    passes.append(("FINISH SINGLE PASS  STEPOVER 0.15  MAX DEPTH 0.4","x",rows,F_FIN))
     with open(path,"w") as fh:
         fh.write(f"%\n( RIVER ISLANDS KNOB TOP  D{2*R:.1f} )\n( TOOL T1: R1.5 BALL NOSE  D3 SHANK  8 FLUTE LEN  50 OAL  4 FLUTE )\n")
-        fh.write("( WORK ZERO: XY = KNOB CENTER, Z = TOP FACE OF BLANK )\n( MAX DEPTH 0.5  SPINDLE S24000  FEED F200 )\n")
+        fh.write("( WORK ZERO: XY = KNOB CENTER, Z = TOP FACE OF BLANK )\n( MAX DEPTH 0.4  SPINDLE S24000 FULL RPM  FEED F200 )\n")
         fh.write("G21 G90 G94 G17 G40 G49 G80\nG54\nT1 M6\nS24000 M3\n"+f"G0 Z{SAFE:.3f}\n")
         # emit each pass, count
         tot=0;nl=0;ln=0;perpass=[]
