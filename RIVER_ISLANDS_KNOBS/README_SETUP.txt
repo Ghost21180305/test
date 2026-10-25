@@ -2,8 +2,11 @@ RIVER ISLANDS KNOBS  D38.1 ane D40.1  (top side design)
 
 Files (darek folder ma):
   KNOB_D..._RIVER_ISLANDS.step   3D model (H27, neck dia 9, top par design)
+  KNOB_D..._RIVER_ISLANDS.stl    mesh model (CAM / viewer mate, watertight)
   RI381.nc / RI401.nc            G-code (ISO, mm)
   KNOB_D..._preview_*.png        preview images
+
+WHERE_TO_SET_ZERO_X0_Y0_Z0.png  X0 Y0 Z0 kyathi levu tenu image
 
 TOOL     R1.5 ball nose, D3 shank, 8 flute length, 50 OAL, 4 flute
 SPINDLE  S24000    FEED F200 (plunge F100)    Overrides 100%
