@@ -1,44 +1,78 @@
-HALF MOON PAIR  (LEFT + RIGHT)  with connecting River Islands design
+HALF MOON PAIR  (LEFT + RIGHT) for DOUBLE DOORS
+=================================================
+Coordinated River Islands design - design flows across the door gap when both doors are closed.
 
-Darek handle:
-  Plate: half-moon 152 mm wide x 76 mm tall, 6.5 mm thick (same as original)
-  Posts: 2 nos, back par, centers 102 mm apart, 40 mm long, boss 15 dia, stud 8 dia
-  Design: River Islands, max depth 0.4 mm, aakha front face par
+ASSUMPTIONS (badlvu hoy to kaho):
+  Door gap:            3 mm (standard cabinet)
+  Each handle shape:   half-moon 152 wide x 76 tall (as per original drawing)
+  Mounting:            flat edge VERTICAL on each handle, facing the door gap
+                       (handle is rotated 90 degrees from the machining orientation
+                        before installation)
 
-Bene handle begha mukta full circle 152 mm nu design bane che. Lower handle ne
-upside-down mukvo pade (flat edge top), ane upper handle normal rakhvi (flat edge bottom).
-Jyare dono flat edges mal thai jay tyare pattern ni channels ek baju thi biji baju vahavi jay.
+EK HANDLE PHYSICAL DIMENSIONS
+  Across (flat edge -> arc apex):  76 mm   -- goes across the door width
+  Along flat edge:                152 mm   -- vertical, parallel to door gap
+  Thickness:                      6.5 mm
+  Posts: 2 nos on back, 102 mm apart along flat edge direction
+         40 mm long, boss 15 dia, stud 8 dia
 
-Files:
-  halfmoon_LEFT_river_islands.stl    LEFT handle (UPPER half of design)
-  halfmoon_RIGHT_river_islands.stl   RIGHT handle (LOWER half of design, mounted upside-down)
-  halfmoon_LEFT.nc                   LEFT handle G-code
-  halfmoon_RIGHT.nc                  RIGHT handle G-code
-  halfmoon_PLAIN.step                plain half-moon STEP (no design) for reference
-  halfmoon_LEFT_preview.png          LEFT 3 views
-  halfmoon_RIGHT_preview.png         RIGHT 3 views
-  pair_DESIGN_FULL_CIRCLE.png        full circle design (bene handle begha)
-  pair_LEFT_RIGHT_topview.png        darek handle alag top view
+PAIR CONCEPT
+  Design = full-circle River Islands pattern (152 mm dia)
+  Vacche thi vertical split karelo:
+    LEFT handle  = pattern no left half  -> left door par mounted
+    RIGHT handle = pattern no right half -> right door par mounted
+  Doors closed thatan bene handle mal thai jay (3 mm gap) ane
+  design ni channels gap ni aarpar jati visually dekhay chhe.
+  Doors khulvamaa 3 mm clearance che, physical contact nathi.
 
-TOOL     R1.5 ball nose, D3 shank, 8 flute length, 50 OAL, 4 flute
-SPINDLE  S24000 full RPM
-FEED     F500 (plunge F180)
-STEPOVER 0.5 mm  (scallop ~0.021 mm, brushed finish par ok, polished par thodi texture dekhay)
-MAX DEPTH  0.4 mm, ek j pass
+INSTALLATION ORIENTATION
+  LEFT door  -> LEFT handle,  flat edge jamni baju (right side of handle)
+  RIGHT door -> RIGHT handle, flat edge daabi baju (left side of handle)
+  Both arcs extend outward (away from gap)
+  Posts drill holes:  per handle 2 holes, 102 mm vertically apart,
+                      centered 51 mm from flat edge (into door)
 
-WORK ZERO  X0 = plate ni width center,  Y0 = flat edge (bottom),  Z0 = plate ni front face
-SAFE Z   +5 mm,  cuts vache +1 mm
+MACHINING ORIENTATION  (vice ma mukta time)
+  Blank ne machine ma mukta time: flat edge NICHE (Y=0), arc UPAR (+Y)
+  OR _downside.nc files vaparo to: flat edge UPAR (Y=0), arc NICHE (-Y)
+  Machine thai pachi install karva maate 90 deg rotate karo.
 
-FEED TIME (per side, feed path / F500, rapid ane lift alag)
-  LEFT handle   20.0 min feed  (9987 mm)   total ~24-25 min
-  RIGHT handle  18.7 min feed  (9344 mm)   total ~22-23 min
+FILES
+  INSTALLED_double_doors.png                     - installation preview
+  halfmoon_LEFT_river_islands.stl                - LEFT handle 3D mesh
+  halfmoon_RIGHT_river_islands.stl               - RIGHT handle 3D mesh
+  halfmoon_LEFT.nc / halfmoon_RIGHT.nc           - fast NC (flat edge niche)
+  halfmoon_LEFT_downside.nc / halfmoon_RIGHT_downside.nc  - fast NC (flat edge upar)
+  halfmoon_LEFT_SMOOTH.nc / halfmoon_RIGHT_SMOOTH.nc      - smooth NC (step 0.15)
+  halfmoon_LEFT_SMOOTH_downside.nc / halfmoon_RIGHT_SMOOTH_downside.nc
+  halfmoon_PLAIN.step                            - plain half-moon STEP
+  WHERE_TO_SET_ZERO.png / WHERE_TO_SET_ZERO_downside.png  - setup guides
+  halfmoon_LEFT_preview.png / halfmoon_RIGHT_preview.png  - individual previews
+  pair_DESIGN_FULL_CIRCLE.png                    - full circle view
+  pair_LEFT_RIGHT_topview.png                    - top-view both halves
+
+TOOL / SPEEDS
+  Tool:     R1.5 ball nose, D3 shank, 8 flute length, 50 OAL, 4 flute
+  Spindle:  S40000 (max RPM)
+  Feed:    F500  (plunge F180)   OR  F500 stepover 0.15 (SMOOTH)
+  Max depth: 0.4 mm, single pass
+
+FEED TIME (per side; rapid + lift + setup extra)
+  Fast variant  (stepover 0.5):   LEFT ~20 min   RIGHT ~19 min
+  Smooth variant (stepover 0.15): LEFT ~66 min   RIGHT ~62 min
+
+WORK ZERO
+  X0 Y0 = flat edge ni vacche (midpoint of flat edge)
+  Z0    = plate ni front face
+  Safe Z = +5 mm,  travel between cuts = +1 mm
+
+END OF PROGRAM
+  Z lift -> spindle stop -> G28 Z home -> G28 X Y home -> M30
 
 NOTES
-  - Target 20 min feed per side che. Rapid, Z lift, tool load, zero setting ni time alag.
-  - Design pehla j F300 stepover 0.25 par 66 min hato. Have F500 + stepover 0.5 thi 20 min.
-    Scallop 0.021 mm thai gayo, brushed brass par thek. Polished par light stepover texture dekhay.
-  - Haju vadhu smooth finish joi e to F300 + stepover 0.25 par chaalavo (per handle ~40 min).
-  - Haju vadhu fast joi e to F600 + stepover 0.6 par chaalavo (per handle ~14 min, visible scallop).
-  - STEP file (full design valo) banavi nathi shakyo intersection ma kai error aavyo.
-    Plain half-moon no STEP mukyo che. Design CAM ma STL mathi joi shako.
-  - Pehla air-run ane scrap par try karo. Machine par chalavyu nathi.
+  - Pehla air-run karo ane scrap par try karo.
+  - Design brass par polished thai pachi, pattern lagbhag reflect kare.
+  - 3 mm door gap assumption chhe. Tamara door no actual gap alag hoy
+    (jem ke 1.5 mm ke 5 mm) to kaho - handle positioning ferfari daish.
+  - Design pattern koi khaas seed par banavo joi e to seed badalvu possible
+    (hamnavi aa seed 11 che).
